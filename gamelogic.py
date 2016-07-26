@@ -12,15 +12,13 @@ import cell
 import random
 
 class Gamelogic():
-    
     def __init__(self):
 
         #initialize teams by recieving team names
         teams = []
-        Teams = input("enter teams").split()
-        number_of_teams = len(Teams)
-        for teamname in Teams:
-            teams.append(cell.Team(teamname))
+        number_of_teams = input("enter number of teams")
+        for i in range(number_of_teams:
+            teams.append(cell.Team("team" + str(i)))
 
         #initialize board size
         self.board = BoardHandler.generateBoard(BOARD_SIZE)
