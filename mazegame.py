@@ -15,17 +15,17 @@ def rendermap(board,position=(100,100)):
             pygame.draw.polygon(maze.screen,(0, 20, 0),((x,y),(x+size_box,y),(x+size_box,y+size_box),(x,y+size_box)))
 
             if board[i][j].wallleft == True:
-            pygame.draw.line(maze.screen,(0,255,0),(x-(distance-size_box)//2,y),(x-(distance-size_box)//2,y+size_box),size_line)
+                pygame.draw.line(maze.screen,(0,255,0),(x-(distance-size_box)//2,y),(x-(distance-size_box)//2,y+size_box),size_line)
             if board[i][j].wallright == True:
-            pygame.draw.line(maze.screen,(0,255,0),(x+size_box+(distance-size_box)//2,y),(x+size_box+(distance-size_box)//2,y+size_box),size_line)
+                pygame.draw.line(maze.screen,(0,255,0),(x+size_box+(distance-size_box)//2,y),(x+size_box+(distance-size_box)//2,y+size_box),size_line)
             if board[i][j].wallup == True:
-            pygame.draw.line(maze.screen,(0,255,0),(x,y-(distance-size_box)//2),(x+size_box,y-(distance-size_box)//2),size_line)
+                pygame.draw.line(maze.screen,(0,255,0),(x,y-(distance-size_box)//2),(x+size_box,y-(distance-size_box)//2),size_line)
             if board[i][j].walldown == True:
-            pygame.draw.line(maze.screen,(0,255,0),(x,y+size_box+(distance-size_box)//2),(x+size_box,y+size_box+(distance-size_box)//2),size_line)
+                pygame.draw.line(maze.screen,(0,255,0),(x,y+size_box+(distance-size_box)//2),(x+size_box,y+size_box+(distance-size_box)//2),size_line)
             if board[i][j].isfinish == True:
-            pygame.draw.circle(maze.screen,(255,0,0),(x+size_box//2,y+size_box//2),20,0)
+                pygame.draw.circle(maze.screen,(255,0,0),(x+size_box//2,y+size_box//2),20,0)
             if board[i][j].iscontainpoint == True:
-            pygame.draw.circle(maze.screen,(0,0,255),(x+size_box//2,y+size_box//2),20,0)
+                pygame.draw.circle(maze.screen,(0,0,255),(x+size_box//2,y+size_box//2),20,0)
             
 
 class Game():
