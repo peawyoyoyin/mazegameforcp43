@@ -2,6 +2,7 @@
 
 import pygame
 import cell
+import gamelogic
 
 class Game():
     def __init__(self):
