@@ -37,13 +37,14 @@ class BoardHandler():
         board=cell.initGrid(dim)
 
         #create a list of all possible coordinates for randoming purposes
-        coordlist=[(i,j) for i in range(BOARD_SIZE) for j in range(BOARD_SIZE)]
+        coordlist=[(i,j) for i in range(dim) for j in range(dim)]
 
         #set finish point
         board[dim-1][dim-1].setFinish()
 
         #generate points
         temp = coordlist.copy()
+        temp.remove((dim-1,dim-1))
 
 
         temp2 = random.sample(coordlist, TOTAL_POINTS)
