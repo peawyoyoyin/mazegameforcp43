@@ -3,16 +3,33 @@
 class Cell():
     def __init__(self,data=None):
         if data != None:
-            self.updateCelldata(data)
-    def updateCellData(self,data):
-        self.wallleft=data.get('walleft',False)
+            self.wallleft=data.get('wallleft',False)
+            self.wallright=data.get('wallright',False)
+            self.wallup=data.get('wallup',False)
+            self.walldown=data.get('walldown',False)
+        else:
+            self.walleft = self.wallright = self.wallup = False
+            self.walldown = self.isfinish = self.iscontainpoint = False
+    
+    def updateWallData(self,data):
+        self.wallleft=data.get('wallleft',False)
         self.wallright=data.get('wallright',False)
         self.wallup=data.get('wallup',False)
         self.walldown=data.get('walldown',False)
-        
-        self.isfinish=data.get('isfinish',False)
 
-        self.iscontainpoint=data.get('iscontainpoint',False)
+    def setFinish(self):
+        self.isfinish = True
+
+    def placePoint(self):
+        self.iscontainpoint = True
+
+    def __str__(self):
+        if(self.isfinish):
+            return "F"
+        elif(self.iscontainpoint):
+            return "P"
+        else:
+            return " "
 
 class Team():
     def __init__(self,teamname):
@@ -26,7 +43,7 @@ class Team():
     def __str__(self):
         return "Team" + self.teamname
 
-def initGrid(dimension,randomdata):
+def initGrid(dimension):
     Grid = []
     for i in range(0,dimension):
         temp = []
