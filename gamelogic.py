@@ -31,6 +31,9 @@ class Gamelogic():
         #initialize turn marker
         self.currentturn = 0
 
+        #initialize move history array
+        self.movehistory = [("start",PLAYER_STARTING_POSITION)]
+
     def playerpos(self):
         return (self.playerx,self.playery)
 
@@ -84,6 +87,11 @@ class Gamelogic():
         self.currentturn+=1
         if self.currentturn == self.number_of_teams:
             self.currentturn = 0
+
+        self.addmovehistory(turnstring.self.playerpos)
+
+    def addmovehistory(turnstring,position):
+        self.movehistory.insert(0,(turnstring,position))
 
     def checkforpoints(self):
         if self.board[self.playery][self.playerx].iscontainpoint:
