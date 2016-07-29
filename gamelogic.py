@@ -18,7 +18,7 @@ class Gamelogic():
 
         #initialize teams by recieving team names
         self.teams = []
-        self.number_of_teams = input("enter number of teams")
+        self.number_of_teams = int(input("enter number of teams"))
         for i in range(self.number_of_teams):
             self.teams.append(cell.Team("team" + str(i)))
 

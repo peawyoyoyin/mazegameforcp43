@@ -4,10 +4,11 @@ import pygame
 import cell
 import gamelogic
 
-def rendermap(board,position=(100,100)):
+def rendermap(board,gamelogic,position=(100,100)):
     size_box = 50
     distance = 70
     size_line = 2
+    size_player = 30
     for i in range(len(board)):
         for j in range(len(board[i])):
             y=position[0]+distance*i
@@ -26,7 +27,8 @@ def rendermap(board,position=(100,100)):
                 pygame.draw.circle(maze.screen,(255,0,0),(x+size_box//2,y+size_box//2),20,0)
             if board[i][j].iscontainpoint == True:
                 pygame.draw.circle(maze.screen,(0,0,255),(x+size_box//2,y+size_box//2),20,0)
-            
+            if gamelogic.isplayer(j,i):
+                pygame.draw.polygon(maze.screen,(255,255,0),((x+size_box//2,y+(size_box-size_player)//2),(x+(size_box-size_player)//2,y+size_box//2),(x+size_box//2,y+size_player+(size_box-size_player)//2),(x+size_player+(size_box-size_player)//2,y+size_box//2)))
 
 class Game():
     def __init__(self):
@@ -46,7 +48,7 @@ class Game():
         
         self.screen.fill(0)
         
-        rendermap(self.gl.board)
+        rendermap(self.gl.board,self.gl)
         pygame.display.flip()
         
         
