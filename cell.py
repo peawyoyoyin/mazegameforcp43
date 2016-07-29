@@ -23,6 +23,9 @@ class Cell():
     def placePoint(self):
         self.iscontainpoint = True
 
+    def removePoint(self):
+        self.iscontainpoint = False
+
     def __str__(self):
         if(self.isfinish):
             return "F"

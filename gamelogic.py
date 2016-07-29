@@ -17,17 +17,22 @@ class Gamelogic():
     def __init__(self):
 
         #initialize teams by recieving team names
-        teams = []
-        number_of_teams = input("enter number of teams")
-        for i in range(number_of_teams:
-            teams.append(cell.Team("team" + str(i)))
+        self.teams = []
+        self.number_of_teams = input("enter number of teams")
+        for i in range(self.number_of_teams):
+            self.teams.append(cell.Team("team" + str(i)))
 
         #initialize board size
         self.board = BoardHandler.generateBoard(BOARD_SIZE)
 
         #initialize player
-        self.playerx,self.playery = self.playerpos = PLAYER_STARTING_POSITION
-        
+        self.playerx,self.playery = PLAYER_STARTING_POSITION
+
+        #initialize turn marker
+        self.currentturn = 0
+
+    def playerpos(self):
+        return (self.playerx,self.playery)
 
     def isplayer(self,x,y):
         if (x,y) == (self.playerx,self.playery):
@@ -38,30 +43,52 @@ class Gamelogic():
         if turnstring == "up":
             #check if up is a valid move
             #"up" : y-=1
-            if playery == 0 or board[playery][playerx].wallup or board[playery-1][playerx].walldown:
+            if self.playery == 0 or self.board[playery][playerx].wallup or self.board[playery-1][playerx].walldown:
                 #invalid move
                 print("invalid move")
 
             else:
-                playery-=1
+                self.playery-=1
         elif turnstring == "down":
             #check if down is a valid move
             #"down" : y+=1
-            if playery == BOARD_SIZE or board[playery][playerx].walldown or board[playery+1][playerx].wallup:
+            if self.playery == BOARD_SIZE or self.board[playery][playerx].walldown or self.board[playery+1][playerx].wallup:
                 #invalid move
                 print("invalid move")
+            else:
+                self.playery+=1
     
         elif turnstring == "left":
             #check if left is a valid move
-            pass
+            #"left" : x-=1
+            if self.playerx == 0 or self.board[playery][playerx].wallleft or self.board[playery][playerx-1].wallright:
+                #invalid move
+                print("invalid move")
+            else:
+                self.playerx-=1
     
         elif turnstring == "right":
             #check if right is a valid move
-            pass
+            if self.playerx == BOARD_SIZE or self.board[playery][playerx].wallright or self.board[playery][playerx+1].wallleft:
+                print("invalid move")
+            else:
+                self.playerx+=1
     
         elif turnstring == "idle":
-            #stay idle
             pass
+
+        if turnstring != "idle":
+            self.checkforpoints()
+
+        #shift turn marker
+        self.currentturn+=1
+        if self.currentturn == self.number_of_teams:
+            self.currentturn = 0
+
+    def checkforpoints(self):
+        if self.board[playery][playerx].iscontainpoint:
+            self.board[playery][playerx].removePoint()
+            self.teams[self.currentturn].addScore()
 
 class BoardHandler():
     def printBoard(board):
@@ -98,7 +125,7 @@ class BoardHandler():
             for x in range(BOARD_SIZE):
                 d = {}
                 
-                if not board[y][x].isfinish:
+                if not board[y][x].isfinish and (x,y) != PLAYER_STARTING_POSITION:
                     
                     if (random.random()*100)<FOUR_WALL_CHANCE:
                         #four walls
