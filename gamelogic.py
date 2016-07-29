@@ -43,7 +43,7 @@ class Gamelogic():
         if turnstring == "up":
             #check if up is a valid move
             #"up" : y-=1
-            if self.playery == 0 or self.board[playery][playerx].wallup or self.board[playery-1][playerx].walldown:
+            if self.playery == 0 or self.board[self.playery][self.playerx].wallup or self.board[self.playery-1][self.playerx].walldown:
                 #invalid move
                 print("invalid move")
 
@@ -52,7 +52,7 @@ class Gamelogic():
         elif turnstring == "down":
             #check if down is a valid move
             #"down" : y+=1
-            if self.playery == BOARD_SIZE or self.board[playery][playerx].walldown or self.board[playery+1][playerx].wallup:
+            if self.playery == BOARD_SIZE or self.board[self.playery][self.playerx].walldown or self.board[self.playery+1][self.playerx].wallup:
                 #invalid move
                 print("invalid move")
             else:
@@ -61,7 +61,7 @@ class Gamelogic():
         elif turnstring == "left":
             #check if left is a valid move
             #"left" : x-=1
-            if self.playerx == 0 or self.board[playery][playerx].wallleft or self.board[playery][playerx-1].wallright:
+            if self.playerx == 0 or self.board[self.playery][self.playerx].wallleft or self.board[self.playery][self.playerx-1].wallright:
                 #invalid move
                 print("invalid move")
             else:
@@ -69,7 +69,7 @@ class Gamelogic():
     
         elif turnstring == "right":
             #check if right is a valid move
-            if self.playerx == BOARD_SIZE or self.board[playery][playerx].wallright or self.board[playery][playerx+1].wallleft:
+            if self.playerx == BOARD_SIZE or self.board[self.playery][self.playerx].wallright or self.board[self.playery][self.playerx+1].wallleft:
                 print("invalid move")
             else:
                 self.playerx+=1
@@ -86,8 +86,8 @@ class Gamelogic():
             self.currentturn = 0
 
     def checkforpoints(self):
-        if self.board[playery][playerx].iscontainpoint:
-            self.board[playery][playerx].removePoint()
+        if self.board[self.playery][self.playerx].iscontainpoint:
+            self.board[self.playery][self.playerx].removePoint()
             self.teams[self.currentturn].addScore()
 
 class BoardHandler():

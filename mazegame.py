@@ -55,6 +55,16 @@ class Game():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_UP:
+                    self.gl.turn("up")
+                elif event.key == pygame.K_DOWN:
+                    self.gl.turn("down")
+                elif event.key == pygame.K_LEFT:
+                    self.gl.turn("left")
+                elif event.key == pygame.K_RIGHT:
+                    self.gl.turn("right")
+                    
 
 
     def quit(self):
