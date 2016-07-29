@@ -8,7 +8,7 @@ class Cell():
             self.wallup=data.get('wallup',False)
             self.walldown=data.get('walldown',False)
         else:
-            self.walleft = self.wallright = self.wallup = False
+            self.wallleft = self.wallright = self.wallup = False
             self.walldown = self.isfinish = self.iscontainpoint = False
     
     def updateWallData(self,data):
