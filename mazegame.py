@@ -4,17 +4,27 @@ import pygame
 import cell
 import gamelogic
 
-def rendermap(board,gamelogic,position=(100,100)):
+def rendermap(board,gamelogic,position=(20,20)):
     size_box = 50
-    distance = 70
+    distance = 65
     size_line = 2
     size_player = 30
     for i in range(len(board)):
         for j in range(len(board[i])):
             y=position[0]+distance*i
             x=position[1]+distance*j
+            
             pygame.draw.polygon(maze.screen,(0, 20, 0),((x,y),(x+size_box,y),(x+size_box,y+size_box),(x,y+size_box)))
-
+            #third stage
+            if len(gamelogic.movehistory)>2 and gamelogic.movehistory[2][2] == (j,i):
+                pygame.draw.polygon(maze.screen,(0, 100, 0),((x,y),(x+size_box,y),(x+size_box,y+size_box),(x,y+size_box)))
+            #second stage
+            if len(gamelogic.movehistory)>1 and gamelogic.movehistory[1][2] == (j,i):
+                pygame.draw.polygon(maze.screen,(0, 180, 0),((x,y),(x+size_box,y),(x+size_box,y+size_box),(x,y+size_box)))
+            #first stage
+            if gamelogic.movehistory[0][2] == (j,i):
+                pygame.draw.polygon(maze.screen,(0, 250, 0),((x,y),(x+size_box,y),(x+size_box,y+size_box),(x,y+size_box)))
+            
             if board[i][j].wallleft == True:
                 pygame.draw.line(maze.screen,(0,255,0),(x-(distance-size_box)//2,y),(x-(distance-size_box)//2,y+size_box),size_line)
             if board[i][j].wallright == True:
@@ -29,12 +39,13 @@ def rendermap(board,gamelogic,position=(100,100)):
                 pygame.draw.circle(maze.screen,(0,0,255),(x+size_box//2,y+size_box//2),20,0)
             if gamelogic.isplayer(j,i):
                 pygame.draw.polygon(maze.screen,(255,255,0),((x+size_box//2,y+(size_box-size_player)//2),(x+(size_box-size_player)//2,y+size_box//2),(x+size_box//2,y+size_player+(size_box-size_player)//2),(x+size_player+(size_box-size_player)//2,y+size_box//2)))
+    
 
 class Game():
     def __init__(self):
         pygame.init()
 
-        DISPLAY_SIZE = DISPLAY_WIDTH , DISPLAY_HEIGHT = 800,800
+        DISPLAY_SIZE = DISPLAY_WIDTH , DISPLAY_HEIGHT = 800,670
         self.screen = pygame.display.set_mode(DISPLAY_SIZE)
         pygame.display.set_caption("CP43maze game")
 

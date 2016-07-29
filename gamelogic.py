@@ -19,7 +19,7 @@ class Gamelogic():
 
         #initialize teams by recieving team names
         self.teams = []
-        self.number_of_teams = int(input("enter number of teams"))
+        self.number_of_teams = int(input("enter number of teams : "))
         for i in range(self.number_of_teams):
             self.teams.append(cell.Team("team" + str(i)))
 
@@ -33,7 +33,7 @@ class Gamelogic():
         self.currentteam = 0
 
         #initialize move history array
-        self.movehistory = [("start",PLAYER_STARTING_POSITION)]
+        self.movehistory = [("start",0,PLAYER_STARTING_POSITION)]
 
     def playerpos(self):
         return (self.playerx,self.playery)
@@ -101,10 +101,10 @@ class Gamelogic():
         if self.currentteam == self.number_of_teams:
             self.currentteam = 0
 
-        self.addmovehistory(turnstring,self.playerpos)
+        self.addmovehistory(turnstring,self.currentteam,(self.playerx,self.playery))
 
-    def addmovehistory(self,turnstring,position):
-        self.movehistory.insert(0,(turnstring,position))
+    def addmovehistory(self,turnstring,currentteam,position):
+        self.movehistory.insert(0,(turnstring,currentteam,position))
 
     def checkforpoints(self):
         if self.board[self.playery][self.playerx].iscontainpoint:
