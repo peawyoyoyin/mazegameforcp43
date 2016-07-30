@@ -44,7 +44,7 @@ class Team():
         self.score+=1
 
     def __str__(self):
-        return "Team" + self.teamname
+        return self.teamname
 
 def initGrid(dimension):
     Grid = []
