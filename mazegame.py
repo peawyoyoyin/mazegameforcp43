@@ -14,12 +14,18 @@ def rendermap(board,gamelogic,position=(20,20)):
     #draw scoreboard
     scoreboard = pygame.Surface(scoreboard_size)
     scoreboard.fill((20, 20, 20))
+    d_line = 40
     for noteam in range(len(gamelogic.teams)):
+        if noteam == gamelogic.currentteam:
+            pygame.draw.rect(scoreboard,(255,255,255),(10,10+noteam*d_line,180,33),1)
         font = pygame.font.Font(None, 36)
-        text = font.render(str(gamelogic.teams[noteam]), 1, (200, 200, 200))
-        scoreboard.blit(text, (10,10+noteam*30))
+        text_team = font.render(str(gamelogic.teams[noteam]), 1, (200, 200, 200))
+        scoreboard.blit(text_team, (15,15+noteam*d_line))
+        text_score = font.render(str(gamelogic.teams[noteam].score),1,(200,200,200))
+        scoreboard.blit(text_score, (scoreboard_size[0]-15-text_score.get_width(),15+noteam*d_line))
     maze.screen.blit(scoreboard,scoreboard_pos)
     #    #draw game board
+    
     for i in range(len(board)):
         for j in range(len(board[i])):
             y=position[0]+distance*i
