@@ -21,7 +21,7 @@ class Gamelogic():
         self.teams = []
         self.number_of_teams = int(input("enter number of teams : "))
         for i in range(self.number_of_teams):
-            self.teams.append(cell.Team("Team" + str(i+1)))
+            self.teams.append(cell.Team("Team " + str(i+1)))
 
         #initialize board size
         self.board = BoardHandler.generateBoard(BOARD_SIZE)
