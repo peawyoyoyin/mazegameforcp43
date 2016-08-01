@@ -1,14 +1,14 @@
 #!python3
 
-ONE_WALL_CHANCE = 20.00
-TWO_WALL_CHANCE = 5.00
+ONE_WALL_CHANCE = 100.00
+TWO_WALL_CHANCE = 0.00
 THREE_WALL_CHANCE = 0.00
 FOUR_WALL_CHANCE = 0.00
 
-PLAYER_STARTING_POSITION = (0,0)
+PLAYER_STARTING_POSITION = (4,4)
 FINISH_POSITION = (9,9)
 
-BOARD_SIZE = 10
+BOARD_SIZE = 9
 TOTAL_POINTS = 20
 
 import cell
@@ -19,7 +19,8 @@ class Gamelogic():
 
         #initialize teams by recieving team names
         self.teams = []
-        self.number_of_teams = int(input("enter number of teams : "))
+        #self.number_of_teams = int(input("enter number of teams : "))
+        self.number_of_teams = 1
         for i in range(self.number_of_teams):
             self.teams.append(cell.Team("Team " + str(i+1)))
 
@@ -97,7 +98,7 @@ class Gamelogic():
             self.checkforpoints()
 
         #shift turn marker
-        self.currentteam+=1
+        #self.currentteam+=1
         if self.currentteam == self.number_of_teams:
             self.currentteam = 0
 
@@ -126,27 +127,27 @@ class BoardHandler():
         coordlist=[(i,j) for i in range(dim) for j in range(dim)]
 
         #set finish point
-        board[FINISH_POSITION[1]][FINISH_POSITION[0]].setFinish()
+        #board[FINISH_POSITION[1]][FINISH_POSITION[0]].setFinish()
 
         #generate points
-        temp = coordlist.copy()
-        temp.remove(FINISH_POSITION)
-        temp.remove(PLAYER_STARTING_POSITION)
+      #  temp = coordlist.copy()
+     #   temp.remove(FINISH_POSITION)
+      #  temp.remove(PLAYER_STARTING_POSITION)
 
 
-        temp2 = random.sample(temp, TOTAL_POINTS)
+      #  temp2 = random.sample(temp, TOTAL_POINTS)
 
-        for x,y in temp2:
-            board[y][x].placePoint()
+      #  for x,y in temp2:
+       #     board[y][x].placePoint()
         #generated points
 
         #generate walls
         coordlist2 = coordlist.copy()
 
         coordlist2.remove(PLAYER_STARTING_POSITION)
-        coordlist2.remove(FINISH_POSITION)
+       # coordlist2.remove(FINISH_POSITION)
         
-        temp = ['left','right','up','down']
+        temp = ['right','up']
         for x,y in coordlist2:
             d = {}
                 
@@ -169,8 +170,8 @@ class BoardHandler():
                 t2 = temp.copy()
                 for i in range(random.randint(3,7)):
                     random.shuffle(t2)
-                d['wall'+t2.pop(0)] = True
-
+                if (x != PLAYER_STARTING_POSITION[0]-1 or y!=PLAYER_STARTING_POSITION[0]) and (y != PLAYER_STARTING_POSITION[1]+1 or x != PLAYER_STARTING_POSITION[1]):
+                    d['wall'+t2.pop(0)] = True
             board[y][x].updateWallData(d)
         return board
 
